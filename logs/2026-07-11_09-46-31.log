@@ -1,0 +1,8 @@
+[ 2026-07-11 09:46:32,866 ] 19 src.logger - INFO - Entered Data Ingestion
+[ 2026-07-11 09:46:32,911 ] 28 src.logger - INFO - Raw Data Saved
+[ 2026-07-11 09:46:32,941 ] 39 src.logger - INFO - Train-Test Split Completed
+[ 2026-07-11 09:46:32,942 ] 87 src.logger - INFO - Reading Train and Test Data
+[ 2026-07-11 09:46:32,987 ] 68 src.logger - INFO - Numerical Pipeline Created
+[ 2026-07-11 09:46:32,987 ] 69 src.logger - INFO - Categorical Pipeline Created
+[ 2026-07-11 09:46:32,987 ] 151 src.logger - INFO - Applying preprocessing
+[ 2026-07-11 09:46:33,036 ] 169 src.logger - INFO - Data Transformation Completed

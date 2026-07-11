@@ -1,16 +1,16 @@
 import os
 import sys
-
 from dataclasses import dataclass
+
+import mlflow
+import mlflow.sklearn
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from xgboost import XGBClassifier
 
 from src.exception import CustomException
-from src.logger import logger
 from src.utils import save_object, evaluate_model
 
 
@@ -37,58 +37,55 @@ class ModelTrainer:
 
         try:
 
-            models = {
+            mlflow.set_experiment("Customer_Churn")
 
-                "Logistic Regression": LogisticRegression(max_iter=1000),
+            with mlflow.start_run():
 
-                "Decision Tree": DecisionTreeClassifier(),
+                models = {
+                    "Logistic Regression": LogisticRegression(max_iter=1000),
+                    "Decision Tree": DecisionTreeClassifier(),
+                    "Random Forest": RandomForestClassifier(),
+                    "Gradient Boosting": GradientBoostingClassifier(),
+                    "XGBoost": XGBClassifier(
+                        use_label_encoder=False,
+                        eval_metric="logloss"
+                    )
+                }
 
-                "Random Forest": RandomForestClassifier(),
-
-                "Gradient Boosting": GradientBoostingClassifier(),
-
-                "XGBoost": XGBClassifier(
-                    use_label_encoder=False,
-                    eval_metric="logloss"
+                model_report = evaluate_model(
+                    X_train,
+                    y_train,
+                    X_test,
+                    y_test,
+                    models
                 )
 
-            }
+                best_model_score = max(model_report.values())
 
-            model_report = evaluate_model(
-                X_train,
-                y_train,
-                X_test,
-                y_test,
-                models
-            )
+                best_model_name = list(model_report.keys())[
+                    list(model_report.values()).index(best_model_score)
+                ]
 
-            print("\nModel Accuracy\n")
+                best_model = models[best_model_name]
 
-            for name, score in model_report.items():
-                print(f"{name} : {score:.4f}")
+                save_object(
+                    self.model_trainer_config.trained_model_file_path,
+                    best_model
+                )
 
-            best_model_score = max(model_report.values())
+                mlflow.log_param("Best Model", best_model_name)
 
-            best_model_name = list(model_report.keys())[
-                list(model_report.values()).index(best_model_score)
-            ]
+                mlflow.log_metric("Accuracy", best_model_score)
 
-            best_model = models[best_model_name]
+                mlflow.sklearn.log_model(
+                    sk_model=best_model,
+                    artifact_path="model"
+                )
 
-            print("\nBest Model :", best_model_name)
-            print("Accuracy   :", best_model_score)
+                print(f"Best Model: {best_model_name}")
+                print(f"Accuracy : {best_model_score}")
 
-            save_object(
-                self.model_trainer_config.trained_model_file_path,
-                best_model
-            )
-
-            print(
-                "\nModel Saved :",
-                self.model_trainer_config.trained_model_file_path
-            )
-
-            return best_model_score
+                return best_model_score
 
         except Exception as e:
             raise CustomException(e, sys)

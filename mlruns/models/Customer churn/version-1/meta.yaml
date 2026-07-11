@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1783745702269
+current_stage: None
+description: ''
+last_updated_timestamp: 1783745702269
+name: Customer churn
+run_id: 3eef9b1956b24ce1a5989066aa7eb0dd
+run_link: ''
+source: file:///C:/Users/Student/Desktop/customer%20churn%20prediction/mlruns/731013488031284408/3eef9b1956b24ce1a5989066aa7eb0dd/artifacts/model
+status: READY
+status_message: null
+storage_location: file:///C:/Users/Student/Desktop/customer%20churn%20prediction/mlruns/731013488031284408/3eef9b1956b24ce1a5989066aa7eb0dd/artifacts/model
+user_id: null
+version: 1
