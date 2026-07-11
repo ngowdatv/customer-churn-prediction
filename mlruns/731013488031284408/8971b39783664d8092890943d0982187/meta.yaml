@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Student/Desktop/customer%20churn%20prediction/mlruns/731013488031284408/8971b39783664d8092890943d0982187/artifacts
+end_time: 1783759070960
+entry_point_name: ''
+experiment_id: '731013488031284408'
+lifecycle_stage: active
+run_id: 8971b39783664d8092890943d0982187
+run_name: kindly-squid-941
+run_uuid: 8971b39783664d8092890943d0982187
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1783759064005
+status: 3
+tags: []
+user_id: Student
