@@ -4,8 +4,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 app = Flask(__name__)
 
-# Dummy training (replace with your actual model later)
-data = pd.read_csv("WA_Fn-UseC_-Telco-Customer-Churn.csv")
+data = pd.read_csv("churn.csv")
 data = data.dropna()
 
 data['Churn'] = data['Churn'].map({'Yes':1, 'No':0})
