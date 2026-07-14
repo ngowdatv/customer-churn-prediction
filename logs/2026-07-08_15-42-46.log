@@ -1,0 +1,4 @@
+[ 2026-07-08 15:42:46,329 ] 19 src.logger - INFO - Entered Data Ingestion
+[ 2026-07-08 15:42:46,373 ] 28 src.logger - INFO - Raw Data Saved
+[ 2026-07-08 15:42:46,401 ] 39 src.logger - INFO - Train-Test Split Completed
+[ 2026-07-08 15:42:46,401 ] 84 src.logger - INFO - Reading train and test data
