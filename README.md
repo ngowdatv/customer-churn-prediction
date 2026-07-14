@@ -1,6 +1,6 @@
-# 🚀 Customer Churn Prediction API | Machine Learning + FastAPI + MLflow
+# Customer Churn Prediction API | Machine Learning + FastAPI + MLflow
 
-## 📌 Overview
+##  Overview
 
 Customer Churn Prediction is an end-to-end Machine Learning application designed to identify customers who are likely to discontinue a service.
 
@@ -10,7 +10,7 @@ The system enables businesses to proactively identify high-risk customers and ta
 
 ---
 
-## 🎯 Project Objectives
+## Project Objectives
 
 - Build a predictive model to identify potential customer churn.
 - Develop a complete Machine Learning pipeline.
@@ -20,7 +20,7 @@ The system enables businesses to proactively identify high-risk customers and ta
 
 ---
 
-# 🏗️ System Architecture
+# System Architecture
              Customer Data
                   |
                   ↓
@@ -54,7 +54,7 @@ The system enables businesses to proactively identify high-risk customers and ta
           
 ---
 
-# ✨ Key Features
+#  Key Features
 
 ### 🔹 Machine Learning Pipeline
 - Automated data preprocessing
@@ -81,7 +81,7 @@ The system enables businesses to proactively identify high-risk customers and ta
 
 ---
 
-# 🛠️ Technology Stack
+#  Technology Stack
 
 | Category | Technologies |
 |----------|-------------|
@@ -97,7 +97,7 @@ The system enables businesses to proactively identify high-risk customers and ta
 
 ---
 
-# 📊 Machine Learning Workflow
+# Machine Learning Workflow
 Data Collection
 |
 ↓
@@ -124,7 +124,7 @@ API Deployment
 
 ---
 
-# 📈 Model Evaluation
+#  Model Evaluation
 
 The trained model is evaluated using industry-standard metrics:
 
