@@ -1,24 +1,21 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-import joblib
 import pandas as pd
-
+import joblib
 
 app = FastAPI(
     title="Customer Churn Prediction API",
-    description="ML API to predict customer churn",
+    description="Predict whether a customer will churn",
     version="1.0"
 )
 
+# Load trained model
+model = joblib.load("model.pkl")
+columns = joblib.load("columns.pkl")
 
-# Load ML model and preprocessing pipeline
-model = joblib.load("artifacts/model.pkl")
-preprocessor = joblib.load("artifacts/preprocessor.pkl")
 
-
-# Input schema
-class CustomerData(BaseModel):
-    customerID: str
+# Input Schema
+class ChurnInput(BaseModel):
     gender: str
     SeniorCitizen: int
     Partner: str
@@ -40,27 +37,28 @@ class CustomerData(BaseModel):
     TotalCharges: float
 
 
-# Home route
 @app.get("/")
 def home():
-    return {
-        "message": "Customer Churn Prediction API is Running"
-    }
+    return {"message": "Customer Churn Prediction API Running 🚀"}
 
 
-# Prediction route
 @app.post("/predict")
-def predict(data: CustomerData):
+def predict(data: ChurnInput):
 
-    input_data = pd.DataFrame([data.model_dump()])
+    input_df = pd.DataFrame([data.model_dump()])
 
-    processed_data = preprocessor.transform(input_data)
+    # One-hot encoding
+    input_df = pd.get_dummies(input_df)
 
-    prediction = model.predict(processed_data)
+    # Match training columns
+    input_df = input_df.reindex(columns=columns, fill_value=0)
 
-    result = prediction[0]
+    # Prediction
+    prediction = model.predict(input_df)[0]
+
+    result = "Churn" if prediction == 1 else "No Churn"
 
     return {
-        "prediction": str(result),
-        "result": "Customer will churn" if result == 1 else "Customer will stay"
+        "Prediction": result,
+        "Prediction Value": int(prediction)
     }
